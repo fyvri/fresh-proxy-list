@@ -1,0 +1,25 @@
+name: Static Analysis
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: Build and Testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: "go.mod"
+
+      - name: Build
+        run: go build -v ./...
+
+      - name: Test
+        run: go test -v ./...

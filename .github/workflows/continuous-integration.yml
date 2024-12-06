@@ -1,0 +1,200 @@
+name: Continuous Integration
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: "Log level"
+        required: true
+        default: "info"
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+
+env:
+  TZ: Asia/Jakarta
+  EMOJI_CHEAT_SHEETS: "👻,😻,💕,🤍,💨,🧚,🧜‍♀️,🧞,💃,🐣,🐉,🦕,🦖,🐳,🐬,🦋,🌻,🌼,🌱,🌿,🍀,🍃,🍻,🛫,🪂,🚀,🌟,✨,⚡,🔥,🎉"
+
+jobs:
+  build:
+    name: Build and Testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: "go.mod"
+
+      - name: Build
+        run: go build -v ./...
+
+      - name: Test
+        run: go test -v ./...
+
+  prepare:
+    name: Prepare Branch
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Remove ${{ vars.ARCHIVE_BRANCH_NAME }} branch if it exists
+        run: |
+          if git ls-remote --exit-code --heads origin ${{ vars.ARCHIVE_BRANCH_NAME }}; then
+            echo "Branch deleted successfully"
+            git push https://x-access-token:${{ secrets.WORKFLOW_GITHUB_TOKEN }}@github.com/${{ github.repository }} --delete ${{ vars.ARCHIVE_BRANCH_NAME }}
+          else
+            echo "Branch does not exist"
+          fi
+
+  update:
+    name: Update Proxies
+    runs-on: ubuntu-latest
+    needs: [prepare]
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Configure GIT
+        run: |
+          git config --global user.email $(git log --reverse --format='%ae' | head -n 1)
+          git config --global user.name $(git log --reverse --format='%an' | head -n 1)
+
+      - name: Create ${{ vars.ARCHIVE_BRANCH_NAME }} branch
+        run: |
+          git checkout -b ${{ vars.ARCHIVE_BRANCH_NAME }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: "go.mod"
+
+      - name: Install dependencies
+        run: |
+          go mod tidy
+
+      - name: Run Go program
+        env:
+          PROXY_RESOURCES: ${{ secrets.PROXY_RESOURCES }}
+        run: |
+          go run ./cmd/main.go
+
+      - name: Check for changes
+        run: |
+          if [ "$(git status --porcelain)" ]; then
+            echo "Changes detected"
+            echo "CHANGES_EXIST=true" >> $GITHUB_ENV
+          else
+            echo "No changes to commit"
+            echo "CHANGES_EXIST=false" >> $GITHUB_ENV
+          fi
+
+      - name: Commit files
+        if: env.CHANGES_EXIST == 'true'
+        run: |
+          git add storage
+          git commit -m "chore(bot): update proxies at $(date '+%a, %d %b %Y %H:%M:%S (GMT+07:00)' | tr '[:upper:]' '[:lower:]') $(echo $EMOJI_CHEAT_SHEETS | tr ',' '\n' | shuf -n 1)"
+
+      - name: Push changes to ${{ vars.ARCHIVE_BRANCH_NAME }} branch
+        if: env.CHANGES_EXIST == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.WORKFLOW_GITHUB_TOKEN }}
+          branch: ${{ vars.ARCHIVE_BRANCH_NAME }}
+          force: true
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: [update]
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout ${{ vars.ARCHIVE_BRANCH_NAME }} branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ vars.ARCHIVE_BRANCH_NAME }}
+
+      - name: Configure GIT
+        run: |
+          git config --global user.email $(git log --reverse --format='%ae' | head -n 1)
+          git config --global user.name $(git log --reverse --format='%an' | head -n 1)
+
+      - name: Get last commit time on ${{ vars.ARCHIVE_BRANCH_NAME }} branch
+        run: |
+          echo "UPDATED_AT=$(date -d "$(git log -1 --format=%cd --date=iso-strict)" "+%A, %B %e, %Y at %H:%M:%S (GMT+07:00)" | awk '{$1=$1; print}')" >> $GITHUB_ENV
+
+      - name: Count proxies
+        run: |
+          echo "HTTP_PROXY_COUNT=$(grep -v '^$' ./storage/classic/http.txt | wc -l)" >> $GITHUB_ENV
+          echo "HTTPS_PROXY_COUNT=$(grep -v '^$' ./storage/classic/https.txt | wc -l)" >> $GITHUB_ENV
+          echo "SOCKS4_PROXY_COUNT=$(grep -v '^$' ./storage/classic/socks4.txt | wc -l)" >> $GITHUB_ENV
+          echo "SOCKS5_PROXY_COUNT=$(grep -v '^$' ./storage/classic/socks5.txt | wc -l)" >> $GITHUB_ENV
+
+      - name: Extract 10 fresh proxies
+        run: |
+          echo "HTTP_PROXIES=$(shuf -n 10 ./storage/classic/http.txt | awk '{printf "%s\\n", $0}')" >> $GITHUB_ENV
+          echo "HTTPS_PROXIES=$(shuf -n 10 ./storage/classic/https.txt | awk '{printf "%s\\n", $0}')" >> $GITHUB_ENV
+          echo "SOCKS4_PROXIES=$(shuf -n 10 ./storage/classic/socks4.txt | awk '{printf "%s\\n", $0}')" >> $GITHUB_ENV
+          echo "SOCKS5_PROXIES=$(shuf -n 10 ./storage/classic/socks5.txt | awk '{printf "%s\\n", $0}')" >> $GITHUB_ENV
+
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Update documentation
+        run: |
+          sed \
+            -e "s/{{UPDATED_AT}}/${UPDATED_AT}/" \
+            -e "s/{{HTTP_PROXY_COUNT}}/${HTTP_PROXY_COUNT}/" \
+            -e "s/{{HTTPS_PROXY_COUNT}}/${HTTPS_PROXY_COUNT}/" \
+            -e "s/{{SOCKS4_PROXY_COUNT}}/${SOCKS4_PROXY_COUNT}/" \
+            -e "s/{{SOCKS5_PROXY_COUNT}}/${SOCKS5_PROXY_COUNT}/" \
+            -e "s/{{HTTP_PROXIES}}/${HTTP_PROXIES}/" \
+            -e "s/{{HTTPS_PROXIES}}/${HTTPS_PROXIES}/" \
+            -e "s/{{SOCKS4_PROXIES}}/${SOCKS4_PROXIES}/" \
+            -e "s/{{SOCKS5_PROXIES}}/${SOCKS5_PROXIES}/" \
+          ./docs/README.template.md > ./README.md
+
+      - name: Check for changes
+        run: |
+          if [ "$(git status --porcelain)" ]; then
+            echo "Changes detected"
+            echo "CHANGES_EXIST=true" >> $GITHUB_ENV
+          else
+            echo "No changes to commit"
+            echo "CHANGES_EXIST=false" >> $GITHUB_ENV
+          fi
+
+      - name: Commit changes
+        if: env.CHANGES_EXIST == 'true'
+        run: |
+          git add README.md
+          git commit -m "docs: release fresh proxy list $(echo $EMOJI_CHEAT_SHEETS | tr ',' '\n' | shuf -n 1)"
+
+      - name: Push changes
+        if: env.CHANGES_EXIST == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.WORKFLOW_GITHUB_TOKEN }}
+          branch: main
+          force: true
