@@ -15,9 +15,9 @@
 [static-analysis::shield]: https://github.com/fyvri/fresh-proxy-list/actions/workflows/static-analysis.yml/badge.svg
 [static-analysis::url]: https://github.com/fyvri/fresh-proxy-list/actions/workflows/static-analysis.yml
 [last-commit::shield]: https://img.shields.io/github/last-commit/fyvri/fresh-proxy-list?style=flat&logo=github&label=last+update
-[last-commit::url]: https://github.com/fyvri/fresh-proxy-list/activity?ref=archive
+[last-commit::url]: https://github.com/fyvri/fresh-proxy-list/activity?ref=archive&activity_type=branch_creation
 [commit-activity::shield]: https://img.shields.io/github/commit-activity/w/fyvri/fresh-proxy-list?style=flat&logo=github
-[commit-activity::url]: https://github.com/fyvri/fresh-proxy-list/commits/archive
+[commit-activity::url]: https://github.com/fyvri/fresh-proxy-list/commits/main
 [discussions::shield]: https://img.shields.io/github/discussions/fyvri/fresh-proxy-list?style=flat&logo=github
 [discussions::url]: https://github.com/fyvri/fresh-proxy-list/discussions
 [issues::shield]: https://img.shields.io/github/issues/fyvri/fresh-proxy-list?style=flat&logo=github
@@ -37,22 +37,22 @@
 [![Discussions][discussions::shield]][discussions::url]
 [![Issues][issues::shield]][issues::url]
 
-An automatically ⏰ updated list of free `HTTP`, `HTTPS`, `SOCKS4`, and `SOCKS5` proxies, available in multiple formats including `TXT`, `CSV`, `JSON`, `XML`, and `YAML`. The list is refreshed ⚡ **hourly** to provide the most accurate 🎯 and up-to-date information. The current data snapshot was 🚀 last updated on `Saturday, December 28, 2024 at 23:20:04 (GMT+07:00)`, ensuring that users have access to the latest and most reliable proxies 🍃 available.
+An automatically ⏰ updated list of free `HTTP`, `HTTPS`, `SOCKS4`, and `SOCKS5` proxies, available in multiple formats including `TXT`, `CSV`, `JSON`, `XML`, and `YAML`. The list is refreshed ⚡ **hourly** to provide the most accurate 🎯 and up-to-date information. The current data snapshot was 🚀 last updated on `Sunday, December 29, 2024 at 00:14:16 (GMT+07:00)`, ensuring that users have access to the latest and most reliable proxies 🍃 available.
 
 <picture>
-  <img alt="HTTP" src="https://img.shields.io/badge/HTTP-189653-4b9081?style=social&logo=adminer" />
+  <img alt="HTTP" src="https://img.shields.io/badge/HTTP-190158-4b9081?style=social&logo=adminer" />
 </picture>
 &nbsp;
 <picture>
-  <img alt="HTTPS" src="https://img.shields.io/badge/HTTPS-21237-4b9081?style=social&logo=adminer" />
+  <img alt="HTTPS" src="https://img.shields.io/badge/HTTPS-20943-4b9081?style=social&logo=adminer" />
 </picture>
 &nbsp;
 <picture>
-  <img alt="SOCKS4" src="https://img.shields.io/badge/SOCKS4-53898-4b9081?style=social&logo=adminer" />
+  <img alt="SOCKS4" src="https://img.shields.io/badge/SOCKS4-54080-4b9081?style=social&logo=adminer" />
 </picture>
 &nbsp;
 <picture>
-  <img alt="SOCKS5" src="https://img.shields.io/badge/SOCKS5-63957-4b9081?style=social&logo=adminer" />
+  <img alt="SOCKS5" src="https://img.shields.io/badge/SOCKS5-64136-4b9081?style=social&logo=adminer" />
 </picture>
 
 </div>
@@ -95,64 +95,64 @@ Duplicated proxies are removed — the only exception is if an IP has a differen
 HTTP
 
 ```txt
-125.99.115.193:40390
-200.55.255.251:8083
-156.228.77.136:3128
-89.38.99.174:17767
-217.147.1.87:5678
-72.10.164.178:26445
-181.78.3.131:999
-114.218.165.32:8089
-177.105.68.18:4153
-80.76.184.87:1080
+95.38.75.39:4145
+156.228.100.89:3128
+89.38.99.174:15968
+65.49.14.154:45278
+103.25.209.206:8282
+67.43.227.228:2637
+157.230.125.248:43169
+117.69.236.2:8089
+72.10.160.173:8101
+18.207.94.163:9999
 
 ```
 
 HTTPS
 
 ```txt
-179.125.172.177:4153
-51.158.253.152:955
-20.83.26.240:3128
-65.49.14.154:13989
-8.211.200.183:8080
-165.225.34.64:10605
-45.184.152.81:999
-206.188.207.167:8443
-182.66.207.139:1888
-168.205.100.36:8080
+65.49.2.84:33783
+185.64.104.132:32645
+188.168.24.38:81
+23.106.249.53:423
+51.158.200.84:1022
+179.43.96.178:8080
+51.158.252.252:921
+124.67.67.17:5678
+84.239.49.183:9002
+185.10.129.14:3128
 
 ```
 
 SOCKS4
 
 ```txt
-103.97.179.62:8080
-51.68.228.235:42389
-58.234.116.197:80
-27.79.214.41:16000
-72.10.160.92:2417
-103.151.194.178:1080
-65.49.68.84:61337
-103.195.252.161:83
-8.213.129.15:8080
-1.4.198.94:4145
+64.227.141.123:22984
+157.230.82.155:29451
+162.144.103.99:36511
+160.16.105.145:8080
+185.170.166.69:80
+27.147.137.90:8090
+196.196.160.211:80
+2.58.56.39:80
+102.222.134.195:8080
+101.255.165.125:80
 
 ```
 
 SOCKS5
 
 ```txt
-43.133.59.220:3128
-167.172.228.48:3128
-117.160.250.163:8081
-107.180.90.61:5663
-8.209.96.245:4002
-18.133.16.21:1080
-23.227.38.92:80
-102.132.49.12:8080
-198.16.78.43:428
-205.178.137.213:8443
+91.229.23.62:12113
+24.152.49.229:999
+202.165.75.188:5860
+103.90.227.244:3128
+47.238.60.156:5060
+45.131.7.60:80
+23.95.37.207:3128
+65.49.2.84:53972
+198.44.255.5:80
+185.162.228.121:80
 
 ```
 
@@ -165,7 +165,7 @@ If you have any ideas, [open an issue](https://github.com/fyvri/fresh-proxy-list
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 > [!IMPORTANT]
-> If you have a suggestion that would make this better, please fork the repo and create a pull request. Don't forget to give the project a star 🌟! I can't stop saying thank you!
+> If you have a suggestion that would make this better, please fork the repo and create a pull request. Don't forget to give the project a star 🌟 I can't stop saying thank you!
 >
 > 1. Fork this project
 > 2. Create your feature branch (`git checkout -b feature/awesome-feature`)
@@ -177,6 +177,6 @@ Contributions are what make the open-source community such an amazing place to l
 
 ## 📜 License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+This project is licensed under the [MIT License](LICENSE). Feel free to use and modify it as needed.
 
 <p align="right">[ <a href="#readme-top">back to top</a> ]</p>
