@@ -54,7 +54,7 @@ jobs:
         run: |
           if git ls-remote --exit-code --heads origin ${{ vars.ARCHIVE_BRANCH_NAME }}; then
             echo "Branch deleted successfully"
-            git push https://x-access-token:${{ secrets.WORKFLOW_GITHUB_TOKEN }}@github.com/${{ github.repository }} --delete ${{ vars.ARCHIVE_BRANCH_NAME }}
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} --delete ${{ vars.ARCHIVE_BRANCH_NAME }}
           else
             echo "Branch does not exist"
           fi
@@ -116,7 +116,7 @@ jobs:
         if: env.CHANGES_EXIST == 'true'
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.WORKFLOW_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ vars.ARCHIVE_BRANCH_NAME }}
           force: true
 
@@ -195,6 +195,6 @@ jobs:
         if: env.CHANGES_EXIST == 'true'
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.WORKFLOW_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
           force: true
