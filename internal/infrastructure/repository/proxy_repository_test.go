@@ -1,39 +1,38 @@
-package repository_test
+package repository
 
 import (
 	"reflect"
 	"testing"
 
 	"github.com/fyvri/fresh-proxy-list/internal/entity"
-	"github.com/fyvri/fresh-proxy-list/internal/infrastructure/repository"
 )
 
 func TestNewProxyRepository(t *testing.T) {
 	tests := []struct {
 		name string
-		want repository.ProxyRepositoryInterface
+		want ProxyRepositoryInterface
 	}{
 		{
 			name: "Success",
-			want: &repository.ProxyRepository{},
+			want: &ProxyRepository{},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			proxyRepository := repository.NewProxyRepository()
+			proxyRepository := NewProxyRepository()
 
 			if proxyRepository == nil {
 				t.Errorf(expectedReturnNonNil, "NewProxyRepository", "ProxyRepositoryInterface")
 			}
 
-			got, ok := proxyRepository.(*repository.ProxyRepository)
+			got, ok := proxyRepository.(*ProxyRepository)
 			if !ok {
-				t.Errorf(expectedTypeAssertionErrorMessage, "*repository.ProxyRepository")
+				t.Errorf(expectedTypeAssertionErrorMessage, "*ProxyRepository")
 			}
 
 			if !reflect.DeepEqual(tt.want, got) {
-				t.Errorf(expectedButGotMessage, "*repository.ProxyRepository", tt.want, got)
+				t.Errorf(expectedButGotMessage, "*ProxyRepository", tt.want, got)
 			}
 		})
 	}
@@ -311,7 +310,7 @@ func TestProxyRepository(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			r := &repository.ProxyRepository{
+			r := &ProxyRepository{
 				AllClassicView:     tt.fields.allClassicView,
 				HTTPClassicView:    tt.fields.httpClassicView,
 				HTTPSClassicView:   tt.fields.httpsClassicView,
@@ -352,13 +351,13 @@ func TestProxyRepository(t *testing.T) {
 func TestGetAllClassicView(t *testing.T) {
 	tests := []struct {
 		name  string
-		setup func() *repository.ProxyRepository
+		setup func() *ProxyRepository
 		want  []string
 	}{
 		{
 			name: "EmptyAllProxies",
-			setup: func() *repository.ProxyRepository {
-				return &repository.ProxyRepository{
+			setup: func() *ProxyRepository {
+				return &ProxyRepository{
 					AllClassicView: []string{},
 				}
 			},
@@ -366,8 +365,8 @@ func TestGetAllClassicView(t *testing.T) {
 		},
 		{
 			name: "WithAllProxies",
-			setup: func() *repository.ProxyRepository {
-				r := &repository.ProxyRepository{}
+			setup: func() *ProxyRepository {
+				r := &ProxyRepository{}
 				r.AllClassicView = []string{
 					testProxy1,
 					testProxy2,
@@ -399,13 +398,13 @@ func TestGetAllClassicView(t *testing.T) {
 func TestGetHTTPClassicView(t *testing.T) {
 	tests := []struct {
 		name  string
-		setup func() *repository.ProxyRepository
+		setup func() *ProxyRepository
 		want  []string
 	}{
 		{
 			name: "EmptyHTTPProxies",
-			setup: func() *repository.ProxyRepository {
-				return &repository.ProxyRepository{
+			setup: func() *ProxyRepository {
+				return &ProxyRepository{
 					HTTPClassicView: []string{},
 				}
 			},
@@ -413,8 +412,8 @@ func TestGetHTTPClassicView(t *testing.T) {
 		},
 		{
 			name: "WithHTTPProxies",
-			setup: func() *repository.ProxyRepository {
-				r := &repository.ProxyRepository{}
+			setup: func() *ProxyRepository {
+				r := &ProxyRepository{}
 				r.HTTPClassicView = []string{
 					testProxy1,
 				}
@@ -440,13 +439,13 @@ func TestGetHTTPClassicView(t *testing.T) {
 func TestGetHTTPSClassicView(t *testing.T) {
 	tests := []struct {
 		name  string
-		setup func() *repository.ProxyRepository
+		setup func() *ProxyRepository
 		want  []string
 	}{
 		{
 			name: "EmptyHTTPSProxies",
-			setup: func() *repository.ProxyRepository {
-				return &repository.ProxyRepository{
+			setup: func() *ProxyRepository {
+				return &ProxyRepository{
 					HTTPSClassicView: []string{},
 				}
 			},
@@ -454,8 +453,8 @@ func TestGetHTTPSClassicView(t *testing.T) {
 		},
 		{
 			name: "WithHTTPSProxies",
-			setup: func() *repository.ProxyRepository {
-				r := &repository.ProxyRepository{}
+			setup: func() *ProxyRepository {
+				r := &ProxyRepository{}
 				r.HTTPSClassicView = []string{
 					testProxy2,
 				}
@@ -481,13 +480,13 @@ func TestGetHTTPSClassicView(t *testing.T) {
 func TestGetSOCKS4ClassicView(t *testing.T) {
 	tests := []struct {
 		name  string
-		setup func() *repository.ProxyRepository
+		setup func() *ProxyRepository
 		want  []string
 	}{
 		{
 			name: "EmptySOCKS4Proxies",
-			setup: func() *repository.ProxyRepository {
-				r := &repository.ProxyRepository{}
+			setup: func() *ProxyRepository {
+				r := &ProxyRepository{}
 				r.SOCKS4ClassicView = []string{}
 				return r
 			},
@@ -495,8 +494,8 @@ func TestGetSOCKS4ClassicView(t *testing.T) {
 		},
 		{
 			name: "WithSOCKS4Proxies",
-			setup: func() *repository.ProxyRepository {
-				return &repository.ProxyRepository{
+			setup: func() *ProxyRepository {
+				return &ProxyRepository{
 					SOCKS4ClassicView: []string{
 						testProxy3,
 					},
@@ -522,13 +521,13 @@ func TestGetSOCKS4ClassicView(t *testing.T) {
 func TestGetSOCKS5ClassicView(t *testing.T) {
 	tests := []struct {
 		name  string
-		setup func() *repository.ProxyRepository
+		setup func() *ProxyRepository
 		want  []string
 	}{
 		{
 			name: "EmptySOCKS5Proxies",
-			setup: func() *repository.ProxyRepository {
-				return &repository.ProxyRepository{
+			setup: func() *ProxyRepository {
+				return &ProxyRepository{
 					SOCKS5ClassicView: []string{},
 				}
 			},
@@ -536,8 +535,8 @@ func TestGetSOCKS5ClassicView(t *testing.T) {
 		},
 		{
 			name: "WithSOCKS5Proxies",
-			setup: func() *repository.ProxyRepository {
-				r := &repository.ProxyRepository{}
+			setup: func() *ProxyRepository {
+				r := &ProxyRepository{}
 				r.SOCKS5ClassicView = []string{
 					testProxy4,
 				}
@@ -563,13 +562,13 @@ func TestGetSOCKS5ClassicView(t *testing.T) {
 func TestGetAllAdvancedView(t *testing.T) {
 	tests := []struct {
 		name  string
-		setup func() *repository.ProxyRepository
+		setup func() *ProxyRepository
 		want  []entity.AdvancedProxy
 	}{
 		{
 			name: "EmptyAllProxies",
-			setup: func() *repository.ProxyRepository {
-				return &repository.ProxyRepository{
+			setup: func() *ProxyRepository {
+				return &ProxyRepository{
 					AllAdvancedView: []entity.AdvancedProxy{},
 				}
 			},
@@ -577,8 +576,8 @@ func TestGetAllAdvancedView(t *testing.T) {
 		},
 		{
 			name: "WithAllProxies",
-			setup: func() *repository.ProxyRepository {
-				r := &repository.ProxyRepository{}
+			setup: func() *ProxyRepository {
+				r := &ProxyRepository{}
 				r.AllAdvancedView = []entity.AdvancedProxy{
 					testAdvancedProxyEntity1,
 					testAdvancedProxyEntity2,
@@ -610,13 +609,13 @@ func TestGetAllAdvancedView(t *testing.T) {
 func TestGetHTTPAdvancedView(t *testing.T) {
 	tests := []struct {
 		name  string
-		setup func() *repository.ProxyRepository
+		setup func() *ProxyRepository
 		want  []entity.Proxy
 	}{
 		{
 			name: "EmptyHTTPProxies",
-			setup: func() *repository.ProxyRepository {
-				return &repository.ProxyRepository{
+			setup: func() *ProxyRepository {
+				return &ProxyRepository{
 					HTTPAdvancedView: []entity.Proxy{},
 				}
 			},
@@ -624,8 +623,8 @@ func TestGetHTTPAdvancedView(t *testing.T) {
 		},
 		{
 			name: "WithHTTPProxies",
-			setup: func() *repository.ProxyRepository {
-				r := &repository.ProxyRepository{}
+			setup: func() *ProxyRepository {
+				r := &ProxyRepository{}
 				r.HTTPAdvancedView = []entity.Proxy{
 					testProxyEntity1,
 				}
@@ -651,13 +650,13 @@ func TestGetHTTPAdvancedView(t *testing.T) {
 func TestGetHTTPSAdvancedView(t *testing.T) {
 	tests := []struct {
 		name  string
-		setup func() *repository.ProxyRepository
+		setup func() *ProxyRepository
 		want  []entity.Proxy
 	}{
 		{
 			name: "EmptyHTTPSProxies",
-			setup: func() *repository.ProxyRepository {
-				return &repository.ProxyRepository{
+			setup: func() *ProxyRepository {
+				return &ProxyRepository{
 					HTTPSAdvancedView: []entity.Proxy{},
 				}
 			},
@@ -665,8 +664,8 @@ func TestGetHTTPSAdvancedView(t *testing.T) {
 		},
 		{
 			name: "WithHTTPSProxies",
-			setup: func() *repository.ProxyRepository {
-				r := &repository.ProxyRepository{}
+			setup: func() *ProxyRepository {
+				r := &ProxyRepository{}
 				r.HTTPSAdvancedView = []entity.Proxy{
 					testProxyEntity2,
 				}
@@ -692,13 +691,13 @@ func TestGetHTTPSAdvancedView(t *testing.T) {
 func TestGetSOCKS4AdvancedView(t *testing.T) {
 	tests := []struct {
 		name  string
-		setup func() *repository.ProxyRepository
+		setup func() *ProxyRepository
 		want  []entity.Proxy
 	}{
 		{
 			name: "EmptySOCKS4Proxies",
-			setup: func() *repository.ProxyRepository {
-				return &repository.ProxyRepository{
+			setup: func() *ProxyRepository {
+				return &ProxyRepository{
 					SOCKS4AdvancedView: []entity.Proxy{},
 				}
 			},
@@ -706,8 +705,8 @@ func TestGetSOCKS4AdvancedView(t *testing.T) {
 		},
 		{
 			name: "WithSOCKSProxies",
-			setup: func() *repository.ProxyRepository {
-				r := &repository.ProxyRepository{}
+			setup: func() *ProxyRepository {
+				r := &ProxyRepository{}
 				r.SOCKS4AdvancedView = []entity.Proxy{
 					testProxyEntity3,
 				}
@@ -733,13 +732,13 @@ func TestGetSOCKS4AdvancedView(t *testing.T) {
 func TestGetSOCKS5AdvancedView(t *testing.T) {
 	tests := []struct {
 		name  string
-		setup func() *repository.ProxyRepository
+		setup func() *ProxyRepository
 		want  []entity.Proxy
 	}{
 		{
 			name: "EmptySOCKS5Proxies",
-			setup: func() *repository.ProxyRepository {
-				return &repository.ProxyRepository{
+			setup: func() *ProxyRepository {
+				return &ProxyRepository{
 					SOCKS5AdvancedView: []entity.Proxy{},
 				}
 			},
@@ -747,8 +746,8 @@ func TestGetSOCKS5AdvancedView(t *testing.T) {
 		},
 		{
 			name: "WithSOCKS5Proxies",
-			setup: func() *repository.ProxyRepository {
-				r := &repository.ProxyRepository{}
+			setup: func() *ProxyRepository {
+				r := &ProxyRepository{}
 				r.SOCKS5AdvancedView = []entity.Proxy{
 					testProxyEntity4,
 				}

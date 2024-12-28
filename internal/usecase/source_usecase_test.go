@@ -1,4 +1,4 @@
-package usecase_test
+package usecase
 
 import (
 	"errors"
@@ -7,7 +7,6 @@ import (
 
 	"github.com/fyvri/fresh-proxy-list/internal/entity"
 	"github.com/fyvri/fresh-proxy-list/internal/infrastructure/repository"
-	"github.com/fyvri/fresh-proxy-list/internal/usecase"
 	"github.com/fyvri/fresh-proxy-list/pkg/utils"
 )
 
@@ -28,7 +27,7 @@ func TestNewSourceUsecase(t *testing.T) {
 	tests := []struct {
 		name   string
 		fields fields
-		want   *usecase.SourceUsecase
+		want   *SourceUsecase
 	}{
 		{
 			name: "Success",
@@ -36,7 +35,7 @@ func TestNewSourceUsecase(t *testing.T) {
 				sourceRepository: &mockSourceRepository{},
 				fetcherUtil:      &mockFetcherUtil{},
 			},
-			want: &usecase.SourceUsecase{
+			want: &SourceUsecase{
 				SourceRepository: &mockSourceRepository{},
 				FetcherUtil:      &mockFetcherUtil{},
 			},
@@ -45,18 +44,18 @@ func TestNewSourceUsecase(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sourceUsecase := usecase.NewSourceUsecase(tt.fields.sourceRepository, tt.fields.fetcherUtil)
+			sourceUsecase := NewSourceUsecase(tt.fields.sourceRepository, tt.fields.fetcherUtil)
 			if sourceUsecase == nil {
 				t.Errorf(expectedReturnNonNil, "NewSourceUsecase", "SourceUsecaseInterface")
 			}
 
-			got, ok := sourceUsecase.(*usecase.SourceUsecase)
+			got, ok := sourceUsecase.(*SourceUsecase)
 			if !ok {
-				t.Errorf(expectedTypeAssertionErrorMessage, "*usecase.SourceUsecase")
+				t.Errorf(expectedTypeAssertionErrorMessage, "*SourceUsecase")
 			}
 
 			if !reflect.DeepEqual(tt.want, got) {
-				t.Errorf(expectedButGotMessage, "*usecase.SourceUsecase", tt.want, got)
+				t.Errorf(expectedButGotMessage, "*SourceUsecase", tt.want, got)
 			}
 		})
 	}
@@ -115,7 +114,7 @@ func TestLoadSourcesSuccess(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			uc := &usecase.SourceUsecase{
+			uc := &SourceUsecase{
 				SourceRepository: tt.fields.sourceRepository,
 			}
 			got, err := uc.LoadSources()
@@ -231,7 +230,7 @@ func TestProcessSource(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			uc := &usecase.SourceUsecase{
+			uc := &SourceUsecase{
 				FetcherUtil: tt.fields.fetcherUtil,
 			}
 			got, err := uc.ProcessSource(&tt.args.source)

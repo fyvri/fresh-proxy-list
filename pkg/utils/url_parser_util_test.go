@@ -1,11 +1,9 @@
-package util_test
+package utils
 
 import (
 	"net/url"
 	"reflect"
 	"testing"
-
-	"github.com/fyvri/fresh-proxy-list/pkg/utils"
 )
 
 func TestParse(t *testing.T) {
@@ -46,7 +44,7 @@ func TestParse(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			u := utils.NewURLParser()
+			u := NewURLParser()
 			got, err := u.Parse(tt.args.rawURL)
 
 			if tt.wantError != nil {

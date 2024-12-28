@@ -1,4 +1,4 @@
-package usecase_test
+package usecase
 
 import (
 	"errors"
@@ -10,20 +10,19 @@ import (
 	"github.com/fyvri/fresh-proxy-list/internal/entity"
 	"github.com/fyvri/fresh-proxy-list/internal/infrastructure/repository"
 	"github.com/fyvri/fresh-proxy-list/internal/service"
-	"github.com/fyvri/fresh-proxy-list/internal/usecase"
 )
 
 func TestNewProxyUsecase(t *testing.T) {
 	mockProxyRepository := &mockProxyRepository{}
 	mockProxyService := &mockProxyService{}
-	proxyUsecase := usecase.NewProxyUsecase(mockProxyRepository, mockProxyService, testSpecialIPs, testPrivateIPs)
+	proxyUsecase := NewProxyUsecase(mockProxyRepository, mockProxyService, testSpecialIPs, testPrivateIPs)
 	if proxyUsecase == nil {
 		t.Errorf(expectedReturnNonNil, "NewProxyUsecase", "ProxyUsecaseInterface")
 	}
 
-	uc, ok := proxyUsecase.(*usecase.ProxyUsecase)
+	uc, ok := proxyUsecase.(*ProxyUsecase)
 	if !ok {
-		t.Errorf(expectedTypeAssertionErrorMessage, "*usecase.ProxyUsecase")
+		t.Errorf(expectedTypeAssertionErrorMessage, "*ProxyUsecase")
 	}
 
 	testKey := testProxyEntity1.Category + "_" + testProxyEntity1.Proxy
@@ -228,7 +227,7 @@ func TestProcessProxy(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			uc := &usecase.ProxyUsecase{
+			uc := &ProxyUsecase{
 				ProxyRepository: tt.fields.proxyRepository,
 				ProxyService:    tt.fields.proxyService,
 				ProxyMap:        sync.Map{},
@@ -328,7 +327,7 @@ func TestIsSpecialIP(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			uc := &usecase.ProxyUsecase{
+			uc := &ProxyUsecase{
 				SpecialIPs: testSpecialIPs,
 				PrivateIPs: testPrivateIPs,
 			}
@@ -369,7 +368,7 @@ func TestGetAllAdvancedView(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			uc := &usecase.ProxyUsecase{
+			uc := &ProxyUsecase{
 				ProxyRepository: tt.fields.proxyRepository,
 			}
 			got := uc.GetAllAdvancedView()

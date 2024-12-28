@@ -1,4 +1,4 @@
-package util_test
+package utils
 
 import (
 	"bytes"
@@ -8,8 +8,6 @@ import (
 	"net/http"
 	"reflect"
 	"testing"
-
-	"github.com/fyvri/fresh-proxy-list/pkg/utils"
 )
 
 var (
@@ -20,15 +18,15 @@ var (
 )
 
 func TestNewFetcher(t *testing.T) {
-	fetcherUtil := utils.NewFetcher(testClient, testNewRequest)
+	fetcherUtil := NewFetcher(testClient, testNewRequest)
 
 	if fetcherUtil == nil {
 		t.Errorf(expectedReturnNonNil, "NewFetcher", "FetcherInterface")
 	}
 
-	fetcherUtilInstance, ok := fetcherUtil.(*utils.FetcherUtil)
+	fetcherUtilInstance, ok := fetcherUtil.(*FetcherUtil)
 	if !ok {
-		t.Errorf(expectedTypeAssertionErrorMessage, "*utils.FetcherUtil")
+		t.Errorf(expectedTypeAssertionErrorMessage, "*FetcherUtil")
 	}
 
 	req, err := fetcherUtilInstance.NewRequestFunc(testGETMethod, testRawURL, nil)
@@ -162,7 +160,7 @@ func TestFetchData(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			fetcherUtil := &utils.FetcherUtil{
+			fetcherUtil := &FetcherUtil{
 				Client: &http.Client{
 					Transport: tt.fields.transport,
 				},
@@ -230,7 +228,7 @@ func TestNewRequest(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			u := utils.NewFetcher(&http.Client{
+			u := NewFetcher(&http.Client{
 				Transport: &mockTransport{},
 			}, testNewRequest)
 			req, err := u.NewRequest(tt.args.method, tt.args.url, tt.args.body)

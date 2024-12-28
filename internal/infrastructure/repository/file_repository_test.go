@@ -1,4 +1,4 @@
-package repository_test
+package repository
 
 import (
 	"bytes"
@@ -10,7 +10,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/fyvri/fresh-proxy-list/internal/infrastructure/repository"
 	"github.com/fyvri/fresh-proxy-list/pkg/utils"
 )
 
@@ -37,13 +36,13 @@ func TestNewFileRepository(t *testing.T) {
 		return &bytes.Buffer{}, nil
 	}
 	mockCSVWriterUtil := &mockCSVWriterUtil{}
-	fileRepository := repository.NewFileRepository(mockMkdirAll, mockCreate, mockCSVWriterUtil)
+	fileRepository := NewFileRepository(mockMkdirAll, mockCreate, mockCSVWriterUtil)
 
 	if fileRepository == nil {
 		t.Errorf(expectedReturnNonNil, "NewFileRepository", "FileRepositoryInterface")
 	}
 
-	r, ok := fileRepository.(*repository.FileRepository)
+	r, ok := fileRepository.(*FileRepository)
 	if !ok {
 		t.Errorf(expectedTypeAssertionErrorMessage, "*FileRepository")
 	}
@@ -435,7 +434,7 @@ func TestSaveFile(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			r := &repository.FileRepository{
+			r := &FileRepository{
 				MkdirAll:  tt.fields.mkdirAll,
 				Create:    tt.fields.create,
 				CSVWriter: tt.fields.csvWriter,
@@ -517,7 +516,7 @@ func TestWriteCSV(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			var buf bytes.Buffer
-			r := &repository.FileRepository{
+			r := &FileRepository{
 				CSVWriter: tt.fields.csvWriter,
 			}
 			err := r.WriteCSV(&buf, tt.args.header, tt.args.rows)

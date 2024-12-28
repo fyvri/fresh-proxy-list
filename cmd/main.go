@@ -96,12 +96,12 @@ func run(runners Runners) error {
 			go func(source entity.Source) {
 				defer wg.Done()
 
-				innerWG := sync.WaitGroup{}
 				proxies, err := sourceUsecase.ProcessSource(&source)
 				if err != nil {
 					return
 				}
 
+				innerWG := sync.WaitGroup{}
 				for _, proxy := range proxies {
 					innerWG.Add(1)
 					go func(source entity.Source, proxy string) {

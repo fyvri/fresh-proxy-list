@@ -1,4 +1,4 @@
-package service_test
+package service
 
 import (
 	"errors"
@@ -12,7 +12,6 @@ import (
 	"time"
 
 	"github.com/fyvri/fresh-proxy-list/internal/entity"
-	"github.com/fyvri/fresh-proxy-list/internal/service"
 	"github.com/fyvri/fresh-proxy-list/pkg/utils"
 )
 
@@ -73,14 +72,14 @@ func (m *mockFetcherUtil) NewRequest(method string, url string, body io.Reader) 
 }
 
 func TestNewProxyService(t *testing.T) {
-	proxyService := service.NewProxyService(&mockFetcherUtil{}, &mockURLParserUtil{}, testHTTPTestingSites, testHTTPSTestingSites, testUserAgents)
+	proxyService := NewProxyService(&mockFetcherUtil{}, &mockURLParserUtil{}, testHTTPTestingSites, testHTTPSTestingSites, testUserAgents)
 	if proxyService == nil {
 		t.Errorf(expectedReturnNonNil, "NewProxyService", "ProxyServiceInterface")
 	}
 
-	s, ok := proxyService.(*service.ProxyService)
+	s, ok := proxyService.(*ProxyService)
 	if !ok {
-		t.Errorf(expectedTypeAssertionErrorMessage, "*service.ProxyService")
+		t.Errorf(expectedTypeAssertionErrorMessage, "*ProxyService")
 	}
 
 	if !reflect.DeepEqual(s.HTTPTestingSites, testHTTPTestingSites) {
@@ -225,7 +224,7 @@ func TestCheck(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := &service.ProxyService{
+			s := &ProxyService{
 				FetcherUtil:       tt.fields.fetcherUtil,
 				URLParserUtil:     tt.fields.urlParserUtil,
 				HTTPTestingSites:  testHTTPTestingSites,
@@ -281,7 +280,7 @@ func TestGetTestingSite(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := &service.ProxyService{
+			s := &ProxyService{
 				HTTPTestingSites:  tt.fields.httpTestingSites,
 				HTTPSTestingSites: tt.fields.httpsTestingSites,
 			}
@@ -316,7 +315,7 @@ func TestGetRandomUserAgent(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := &service.ProxyService{
+			s := &ProxyService{
 				UserAgents: testUserAgents,
 			}
 			site := s.GetRandomUserAgent()

@@ -1,4 +1,4 @@
-package util_test
+package utils
 
 import (
 	"bytes"
@@ -6,8 +6,6 @@ import (
 	"io"
 	"reflect"
 	"testing"
-
-	"github.com/fyvri/fresh-proxy-list/pkg/utils"
 )
 
 var (
@@ -17,28 +15,28 @@ var (
 func TestNewCSVWriter(t *testing.T) {
 	tests := []struct {
 		name string
-		want utils.CSVWriterUtilInterface
+		want CSVWriterUtilInterface
 	}{
 		{
 			name: "Success",
-			want: &utils.CSVWriterUtil{},
+			want: &CSVWriterUtil{},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			csvWriterUtil := utils.NewCSVWriter()
+			csvWriterUtil := NewCSVWriter()
 			if csvWriterUtil == nil {
 				t.Errorf(expectedReturnNonNil, "NewCSVWriter", "CSVWriterUtilInterface")
 			}
 
-			got, ok := csvWriterUtil.(*utils.CSVWriterUtil)
+			got, ok := csvWriterUtil.(*CSVWriterUtil)
 			if !ok {
-				t.Errorf(expectedTypeAssertionErrorMessage, "*utils.CSVWriterUtil")
+				t.Errorf(expectedTypeAssertionErrorMessage, "*CSVWriterUtil")
 			}
 
 			if !reflect.DeepEqual(tt.want, got) {
-				t.Errorf(expectedButGotMessage, "*utils.CSVWriterUtil", tt.want, got)
+				t.Errorf(expectedButGotMessage, "*CSVWriterUtil", tt.want, got)
 			}
 		})
 	}
@@ -65,7 +63,7 @@ func TestInit(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			u := utils.NewCSVWriter()
+			u := NewCSVWriter()
 			got := u.Init(tt.args.writer)
 			if reflect.TypeOf(got) != reflect.TypeOf(tt.want) {
 				t.Errorf(expectedButGotMessage, "Init()", reflect.TypeOf(tt.want), reflect.TypeOf(got))
@@ -76,7 +74,7 @@ func TestInit(t *testing.T) {
 
 func TestFlush(t *testing.T) {
 	type setup struct {
-		newCSVWriter func() *utils.CSVWriterUtil
+		newCSVWriter func() *CSVWriterUtil
 	}
 
 	type args struct {
@@ -91,8 +89,8 @@ func TestFlush(t *testing.T) {
 		{
 			name: "Success",
 			setup: setup{
-				newCSVWriter: func() *utils.CSVWriterUtil {
-					return utils.NewCSVWriter().(*utils.CSVWriterUtil)
+				newCSVWriter: func() *CSVWriterUtil {
+					return NewCSVWriter().(*CSVWriterUtil)
 				},
 			},
 			args: args{
@@ -111,7 +109,7 @@ func TestFlush(t *testing.T) {
 
 func TestWrite(t *testing.T) {
 	type setup struct {
-		newCSVWriter func() *utils.CSVWriterUtil
+		newCSVWriter func() *CSVWriterUtil
 	}
 
 	type args struct {
@@ -128,8 +126,8 @@ func TestWrite(t *testing.T) {
 		{
 			name: "Success",
 			setup: setup{
-				newCSVWriter: func() *utils.CSVWriterUtil {
-					return utils.NewCSVWriter().(*utils.CSVWriterUtil)
+				newCSVWriter: func() *CSVWriterUtil {
+					return NewCSVWriter().(*CSVWriterUtil)
 				},
 			},
 			args: args{

@@ -1,11 +1,9 @@
-package entity_test
+package entity
 
 import (
 	"encoding/json"
 	"strconv"
 	"testing"
-
-	"github.com/fyvri/fresh-proxy-list/internal/entity"
 )
 
 var (
@@ -19,7 +17,7 @@ var (
 
 func TestUnmarshalJSONWithIsChecked(t *testing.T) {
 	var (
-		source = entity.Source{}
+		source = Source{}
 		data   = []byte(`{
 			"method": "` + testMethod + `",
 			"category": "` + testCategory + `",
@@ -52,7 +50,7 @@ func TestUnmarshalJSONWithIsChecked(t *testing.T) {
 
 func TestUnmarshalJSONWithoutIsChecked(t *testing.T) {
 	var (
-		source = entity.Source{}
+		source = Source{}
 		data   = []byte(`{
 			"method": "` + testMethod + `",
 			"category": "` + testCategory + `",
@@ -84,7 +82,7 @@ func TestUnmarshalJSONWithoutIsChecked(t *testing.T) {
 
 func TestUnmarshalJSONWithInvalidData(t *testing.T) {
 	var (
-		source = entity.Source{}
+		source = Source{}
 		data   = []byte(`{
 			"method": "` + testMethod + `",
 			"category": "` + testCategory + `",
@@ -100,7 +98,7 @@ func TestUnmarshalJSONWithInvalidData(t *testing.T) {
 
 func TestUnmarshalJSONWithEmptyData(t *testing.T) {
 	var (
-		source = entity.Source{}
+		source = Source{}
 		data   = []byte(`{}`)
 	)
 	err := json.Unmarshal(data, &source)

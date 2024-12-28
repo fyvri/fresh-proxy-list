@@ -1,4 +1,4 @@
-package usecase_test
+package usecase
 
 import (
 	"path/filepath"
@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/fyvri/fresh-proxy-list/internal/entity"
-	"github.com/fyvri/fresh-proxy-list/internal/usecase"
 )
 
 var (
@@ -93,7 +92,7 @@ func TestSaveFiles(t *testing.T) {
 		}
 		return nil
 	}
-	uc := usecase.NewFileUsecase(mockFileRepository, mockProxyRepository, testFileOutputExtensions)
+	uc := NewFileUsecase(mockFileRepository, mockProxyRepository, testFileOutputExtensions)
 	uc.SaveFiles()
 
 	// (5 categories * number of extensions * 2 file types (classic, advanced)) + (5 all * 1 extension txt * 1 file type classic)

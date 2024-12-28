@@ -1,4 +1,4 @@
-package repository_test
+package repository
 
 import (
 	"errors"
@@ -6,7 +6,6 @@ import (
 	"testing"
 
 	"github.com/fyvri/fresh-proxy-list/internal/entity"
-	"github.com/fyvri/fresh-proxy-list/internal/infrastructure/repository"
 )
 
 func TestNewSourceRepository(t *testing.T) {
@@ -17,32 +16,32 @@ func TestNewSourceRepository(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want repository.SourceRepositoryInterface
+		want SourceRepositoryInterface
 	}{
 		{
 			name: "Success",
 			args: args{
 				proxy_resources: "",
 			},
-			want: &repository.SourceRepository{},
+			want: &SourceRepository{},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sourceRepository := repository.NewSourceRepository(tt.args.proxy_resources)
+			sourceRepository := NewSourceRepository(tt.args.proxy_resources)
 
 			if sourceRepository == nil {
 				t.Errorf(expectedReturnNonNil, "NewSourceRepository", "SourceRepositoryInterface")
 			}
 
-			got, ok := sourceRepository.(*repository.SourceRepository)
+			got, ok := sourceRepository.(*SourceRepository)
 			if !ok {
-				t.Errorf(expectedTypeAssertionErrorMessage, "*repository.SourceRepository")
+				t.Errorf(expectedTypeAssertionErrorMessage, "*SourceRepository")
 			}
 
 			if !reflect.DeepEqual(tt.want, got) {
-				t.Errorf(expectedButGotMessage, "*repository.SourceRepository", tt.want, got)
+				t.Errorf(expectedButGotMessage, "*SourceRepository", tt.want, got)
 			}
 		})
 	}
@@ -94,7 +93,7 @@ func TestLoadSources(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			r := &repository.SourceRepository{
+			r := &SourceRepository{
 				ProxyResources: tt.args.proxy_resources,
 			}
 			got, err := r.LoadSources()
