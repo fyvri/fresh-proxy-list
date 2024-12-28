@@ -15,9 +15,9 @@
 [static-analysis::shield]: https://github.com/fyvri/fresh-proxy-list/actions/workflows/static-analysis.yml/badge.svg
 [static-analysis::url]: https://github.com/fyvri/fresh-proxy-list/actions/workflows/static-analysis.yml
 [last-commit::shield]: https://img.shields.io/github/last-commit/fyvri/fresh-proxy-list?style=flat&logo=github&label=last+update
-[last-commit::url]: https://github.com/fyvri/fresh-proxy-list/activity?ref=archive
+[last-commit::url]: https://github.com/fyvri/fresh-proxy-list/activity?ref=archive&activity_type=branch_creation
 [commit-activity::shield]: https://img.shields.io/github/commit-activity/w/fyvri/fresh-proxy-list?style=flat&logo=github
-[commit-activity::url]: https://github.com/fyvri/fresh-proxy-list/commits/archive
+[commit-activity::url]: https://github.com/fyvri/fresh-proxy-list/commits/main
 [discussions::shield]: https://img.shields.io/github/discussions/fyvri/fresh-proxy-list?style=flat&logo=github
 [discussions::url]: https://github.com/fyvri/fresh-proxy-list/discussions
 [issues::shield]: https://img.shields.io/github/issues/fyvri/fresh-proxy-list?style=flat&logo=github
@@ -125,7 +125,7 @@ If you have any ideas, [open an issue](https://github.com/fyvri/fresh-proxy-list
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 > [!IMPORTANT]
-> If you have a suggestion that would make this better, please fork the repo and create a pull request. Don't forget to give the project a star 🌟! I can't stop saying thank you!
+> If you have a suggestion that would make this better, please fork the repo and create a pull request. Don't forget to give the project a star 🌟 I can't stop saying thank you!
 >
 > 1. Fork this project
 > 2. Create your feature branch (`git checkout -b feature/awesome-feature`)
@@ -137,6 +137,6 @@ Contributions are what make the open-source community such an amazing place to l
 
 ## 📜 License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+This project is licensed under the [MIT License](LICENSE). Feel free to use and modify it as needed.
 
 <p align="right">[ <a href="#readme-top">back to top</a> ]</p>
