@@ -1,5 +1,5 @@
-[donate::shield]: https://img.shields.io/badge/Donate-Saweria-orange.svg
-[donate::url]: https://saweria.co/azisalvriyanto
+[donate::shield]: https://img.shields.io/badge/Donate-PayPal-0070BA?logo=paypal
+[donate::url]: https://paypal.me/membasuh
 [contributors::shield]: https://img.shields.io/github/contributors/fyvri/fresh-proxy-list?style=flat
 [contributors::url]: https://github.com/fyvri/fresh-proxy-list/graphs/contributors
 [license::shield]: https://img.shields.io/badge/License-MIT-4b9081?style=flat
@@ -25,7 +25,7 @@
 
 <div id="readme-top" align="center">
 
-<h1> Fresh Proxy List</h1>
+<h1>Fresh Proxy List</h1>
 
 [![Donate][donate::shield]][donate::url]
 [![License][license::shield]][license::url]
