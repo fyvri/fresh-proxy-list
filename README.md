@@ -1,5 +1,5 @@
-[donate::shield]: https://img.shields.io/badge/Donate-Saweria-orange.svg
-[donate::url]: https://saweria.co/azisalvriyanto
+[donate::shield]: https://img.shields.io/badge/Donate-PayPal-0070BA?logo=paypal
+[donate::url]: https://paypal.me/membasuh
 [contributors::shield]: https://img.shields.io/github/contributors/fyvri/fresh-proxy-list?style=flat
 [contributors::url]: https://github.com/fyvri/fresh-proxy-list/graphs/contributors
 [license::shield]: https://img.shields.io/badge/License-MIT-4b9081?style=flat
@@ -25,7 +25,7 @@
 
 <div id="readme-top" align="center">
 
-<h1> Fresh Proxy List</h1>
+<h1>Fresh Proxy List</h1>
 
 [![Donate][donate::shield]][donate::url]
 [![License][license::shield]][license::url]
@@ -37,22 +37,22 @@
 [![Discussions][discussions::shield]][discussions::url]
 [![Issues][issues::shield]][issues::url]
 
-An automatically ⏰ updated list of free `HTTP`, `HTTPS`, `SOCKS4`, and `SOCKS5` proxies, available in multiple formats including `TXT`, `CSV`, `JSON`, `XML`, and `YAML`. The list is refreshed ⚡ **hourly** to provide the most accurate 🎯 and up-to-date information. The current data snapshot was 🚀 last updated on `Monday, March 31, 2025 at 23:23:23 (GMT+07:00)`, ensuring that users have access to the latest and most reliable proxies 🍃 available.
+An automatically ⏰ updated list of free `HTTP`, `HTTPS`, `SOCKS4`, and `SOCKS5` proxies, available in multiple formats including `TXT`, `CSV`, `JSON`, `XML`, and `YAML`. The list is refreshed ⚡ **hourly** to provide the most accurate 🎯 and up-to-date information. The current data snapshot was 🚀 last updated on `Tuesday, April 1, 2025 at 02:16:07 (GMT+07:00)`, ensuring that users have access to the latest and most reliable proxies 🍃 available.
 
 <picture>
-  <img alt="HTTP" src="https://img.shields.io/badge/HTTP-185693-4b9081?style=social&logo=adminer" />
+  <img alt="HTTP" src="https://img.shields.io/badge/HTTP-196718-4b9081?style=social&logo=adminer" />
 </picture>
 &nbsp;
 <picture>
-  <img alt="HTTPS" src="https://img.shields.io/badge/HTTPS-38947-4b9081?style=social&logo=adminer" />
+  <img alt="HTTPS" src="https://img.shields.io/badge/HTTPS-49307-4b9081?style=social&logo=adminer" />
 </picture>
 &nbsp;
 <picture>
-  <img alt="SOCKS4" src="https://img.shields.io/badge/SOCKS4-49772-4b9081?style=social&logo=adminer" />
+  <img alt="SOCKS4" src="https://img.shields.io/badge/SOCKS4-49667-4b9081?style=social&logo=adminer" />
 </picture>
 &nbsp;
 <picture>
-  <img alt="SOCKS5" src="https://img.shields.io/badge/SOCKS5-45387-4b9081?style=social&logo=adminer" />
+  <img alt="SOCKS5" src="https://img.shields.io/badge/SOCKS5-45441-4b9081?style=social&logo=adminer" />
 </picture>
 
 </div>
@@ -95,64 +95,64 @@ Duplicated proxies are removed — the only exception is if an IP has a differen
 HTTP
 
 ```txt
-65.49.68.84:37259
-103.238.200.61:3333
-159.203.137.249:22800
-199.85.209.166:54572
-72.10.160.90:5419
-27.189.134.91:8089
-156.238.157.237:6500
-114.216.224.140:8089
-65.49.68.84:45375
-27.79.144.217:16000
+64.227.106.157:80
+103.216.61.48:8118
+138.118.106.237:999
+190.186.237.103:80
+135.181.30.244:56250
+45.64.124.34:5678
+65.49.2.84:47121
+167.99.87.173:1080
+64.62.219.84:56583
+64.62.219.84:52753
 
 ```
 
 HTTPS
 
 ```txt
-43.153.74.197:13001
-103.241.128.136:8443
-72.10.160.170:7441
-65.49.68.84:57322
-177.130.104.86:33333
-65.49.2.84:58351
-65.49.14.154:24661
-64.62.219.84:20094
-65.49.68.84:61051
-103.48.71.70:83
+46.161.195.105:1976
+65.49.14.154:42651
+65.49.2.84:12623
+65.49.68.84:42567
+207.244.89.162:443
+65.49.2.84:22866
+193.176.84.17:9002
+65.49.68.84:46751
+65.49.2.84:18546
+38.152.72.186:2335
 
 ```
 
 SOCKS4
 
 ```txt
-103.205.128.41:4145
-95.64.144.66:1080
-141.101.121.31:80
-185.162.231.184:80
-184.185.2.12:4145
-45.12.31.242:80
-141.101.121.161:80
-141.101.122.185:80
-172.67.188.7:80
-123.233.245.158:9080
+95.164.216.41:8081
+103.240.33.129:8291
+23.227.39.163:80
+133.18.234.13:80
+95.217.152.184:5165
+185.162.229.235:80
+141.101.121.163:80
+178.132.0.84:23025
+188.124.15.13:3629
+27.189.134.78:8089
 
 ```
 
 SOCKS5
 
 ```txt
-57.128.201.50:3128
-117.80.188.21:8089
-141.101.121.61:80
-172.67.177.253:80
-45.171.159.220:999
-172.67.50.157:80
-89.108.74.82:1080
-103.139.25.121:8080
-165.16.5.162:9999
-164.92.105.75:2083
+45.174.78.253:999
+103.160.204.104:80
+213.6.99.106:8080
+108.162.192.36:80
+139.5.155.97:57413
+172.64.147.24:80
+156.38.112.11:80
+172.67.167.158:80
+177.137.238.242:8080
+45.131.6.110:80
 
 ```
 
