@@ -17,7 +17,7 @@ on:
 
 env:
   TZ: Asia/Jakarta
-  EMOJI_CHEAT_SHEETS: "👻,😻,💕,🤍,💨,🧚,🧜‍♀️,🧞,💃,🐣,🐉,🦕,🦖,🐳,🐬,🦋,🌻,🌼,🌱,🌿,🍀,🍃,🍻,🛫,🪂,🚀,🌟,✨,⚡,🔥,🎉"
+  EMOJI_CHEAT_SHEETS: "🤯,👻,😻,💕,🤍,💨,🦸,🧚,🧜‍♀️,🧞,💃,🦍,🐅,🦄,🐏,🦙,🦣,🦥,🦦,🐔,🐣,🕊️,🐉,🦕,🦖,🐳,🐬,🦭,🦋,🦠,🌻,🌼,🌱,🌿,🍀,🍃,🍻,🛫,🪂,🚀,🛸,🌟,⚡,🔥,✨,🎉,🧬"
 
 jobs:
   build:
@@ -43,6 +43,8 @@ jobs:
     name: Prepare Branch
     runs-on: ubuntu-latest
     needs: [build]
+    outputs:
+      emoji: ${{ steps.select-emoji.outputs.emoji }}
 
     steps:
       - name: Checkout main branch
@@ -59,6 +61,11 @@ jobs:
             echo "Branch does not exist"
           fi
 
+      - name: Select an emoji
+        id: select-emoji
+        run: |
+          echo "EMOJI=$(echo $EMOJI_CHEAT_SHEETS | tr ',' '\n' | shuf -n 1)" >> $GITHUB_OUTPUT
+
   update:
     name: Update Proxies
     runs-on: ubuntu-latest
@@ -74,8 +81,8 @@ jobs:
 
       - name: Configure GIT
         run: |
-          git config --global user.email $(git log --reverse --format='%ae' | head -n 1)
-          git config --global user.name $(git log --reverse --format='%an' | head -n 1)
+          git config --global user.name "$(git log --reverse --format='%an' | head -n 1)"
+          git config --global user.email "$(git log --reverse --format='%ae' | head -n 1)"
 
       - name: Create ${{ vars.ARCHIVE_BRANCH_NAME }} branch
         run: |
@@ -98,7 +105,7 @@ jobs:
 
       - name: Check for changes
         run: |
-          if [ "$(git status --porcelain)" ]; then
+          if [ "$(git status --porcelain storage)" ]; then
             echo "Changes detected"
             echo "CHANGES_EXIST=true" >> $GITHUB_ENV
           else
@@ -110,7 +117,7 @@ jobs:
         if: env.CHANGES_EXIST == 'true'
         run: |
           git add storage
-          git commit -m "chore(bot): update proxies at $(date '+%a, %d %b %Y %H:%M:%S (GMT+07:00)' | tr '[:upper:]' '[:lower:]') $(echo $EMOJI_CHEAT_SHEETS | tr ',' '\n' | shuf -n 1)"
+          git commit -m "chore(bot): update proxies at $(date '+%a, %d %b %Y %H:%M:%S (GMT+07:00)' | tr '[:upper:]' '[:lower:]') ${{ needs.prepare.outputs.emoji }}"
 
       - name: Push changes to ${{ vars.ARCHIVE_BRANCH_NAME }} branch
         if: env.CHANGES_EXIST == 'true'
@@ -123,7 +130,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: [update]
+    needs: [prepare, update]
     permissions:
       contents: write
 
@@ -135,8 +142,8 @@ jobs:
 
       - name: Configure GIT
         run: |
-          git config --global user.email $(git log --reverse --format='%ae' | head -n 1)
-          git config --global user.name $(git log --reverse --format='%an' | head -n 1)
+          git config --global user.name "$(git log --reverse --format='%an' | head -n 1)"
+          git config --global user.email "$(git log --reverse --format='%ae' | head -n 1)"
 
       - name: Get last commit time on ${{ vars.ARCHIVE_BRANCH_NAME }} branch
         run: |
@@ -177,7 +184,7 @@ jobs:
 
       - name: Check for changes
         run: |
-          if [ "$(git status --porcelain)" ]; then
+          if [ "$(git status --porcelain README.md)" ]; then
             echo "Changes detected"
             echo "CHANGES_EXIST=true" >> $GITHUB_ENV
           else
@@ -189,7 +196,7 @@ jobs:
         if: env.CHANGES_EXIST == 'true'
         run: |
           git add README.md
-          git commit -m "docs: release fresh proxy list $(echo $EMOJI_CHEAT_SHEETS | tr ',' '\n' | shuf -n 1)"
+          git commit -m "docs: release fresh proxy list ${{ needs.prepare.outputs.emoji }}"
 
       - name: Push changes
         if: env.CHANGES_EXIST == 'true'
