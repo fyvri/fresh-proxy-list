@@ -37,22 +37,22 @@
 [![Discussions][discussions::shield]][discussions::url]
 [![Issues][issues::shield]][issues::url]
 
-An automatically ⏰ updated list of free `HTTP`, `HTTPS`, `SOCKS4`, and `SOCKS5` proxies, available in multiple formats including `TXT`, `CSV`, `JSON`, `XML`, and `YAML`. The list is refreshed ⚡ **hourly** to provide the most accurate 🎯 and up-to-date information. The current data snapshot was 🚀 last updated on `Friday, November 14, 2025 at 15:29:17 (GMT+07:00)`, ensuring that users have access to the latest and most reliable proxies 🍃 available.
+An automatically ⏰ updated list of free `HTTP`, `HTTPS`, `SOCKS4`, and `SOCKS5` proxies, available in multiple formats including `TXT`, `CSV`, `JSON`, `XML`, and `YAML`. The list is refreshed ⚡ **hourly** to provide the most accurate 🎯 and up-to-date information. The current data snapshot was 🚀 last updated on `Friday, November 14, 2025 at 16:24:46 (GMT+07:00)`, ensuring that users have access to the latest and most reliable proxies 🍃 available.
 
 <picture>
-  <img alt="HTTP" src="https://img.shields.io/badge/HTTP-237742-4b9081?style=social&logo=adminer" />
+  <img alt="HTTP" src="https://img.shields.io/badge/HTTP-237705-4b9081?style=social&logo=adminer" />
 </picture>
 &nbsp;
 <picture>
-  <img alt="HTTPS" src="https://img.shields.io/badge/HTTPS-62457-4b9081?style=social&logo=adminer" />
+  <img alt="HTTPS" src="https://img.shields.io/badge/HTTPS-62499-4b9081?style=social&logo=adminer" />
 </picture>
 &nbsp;
 <picture>
-  <img alt="SOCKS4" src="https://img.shields.io/badge/SOCKS4-159736-4b9081?style=social&logo=adminer" />
+  <img alt="SOCKS4" src="https://img.shields.io/badge/SOCKS4-159839-4b9081?style=social&logo=adminer" />
 </picture>
 &nbsp;
 <picture>
-  <img alt="SOCKS5" src="https://img.shields.io/badge/SOCKS5-176438-4b9081?style=social&logo=adminer" />
+  <img alt="SOCKS5" src="https://img.shields.io/badge/SOCKS5-176545-4b9081?style=social&logo=adminer" />
 </picture>
 
 </div>
@@ -95,64 +95,64 @@ Duplicated proxies are removed — the only exception is if an IP has a differen
 HTTP
 
 ```txt
-154.92.9.40:80
-103.209.88.75:8080
-140.235.168.85:8085
-115.56.240.254:7302
-183.196.64.31:7890
-115.87.213.177:8080
-45.135.139.46:6349
-173.211.8.142:6254
-104.239.115.187:3199
-83.142.54.121:8085
+173.239.219.181:6090
+103.144.90.72:8080
+108.162.198.50:80
+173.245.58.95:80
+141.101.120.44:80
+5.75.229.93:8080
+72.10.160.170:11513
+27.147.132.123:888
+168.93.3.98:3561
+157.180.121.252:27557
 
 ```
 
 HTTPS
 
 ```txt
-185.193.30.99:80
-104.27.19.35:80
-45.131.211.235:80
-46.161.194.134:3128
-15.168.14.236:3128
-185.148.107.194:80
-104.17.161.98:80
-184.168.47.102:80
-185.176.26.218:80
-170.114.46.45:80
+104.17.17.141:80
+156.225.72.85:80
+176.241.82.149:5678
+103.178.171.81:8080
+102.177.176.148:80
+154.194.12.220:80
+185.162.230.103:80
+177.234.217.82:999
+103.233.103.237:4153
+104.16.106.16:80
 
 ```
 
 SOCKS4
 
 ```txt
-20.196.112.56:3129
-188.114.99.255:80
-185.146.173.233:80
-181.214.13.132:5973
-49.48.89.119:8080
-8.210.182.248:1111
-185.94.35.43:8085
-185.77.223.166:8085
-141.98.85.87:8085
-72.207.113.97:4145
+104.238.38.145:6413
+185.202.175.182:6970
+185.93.89.143:4218
+95.83.57.144:1081
+117.177.172.76:8123
+199.96.165.39:8085
+8.218.239.214:1100
+104.21.28.229:80
+185.77.221.68:8085
+80.79.6.171:13514
 
 ```
 
 SOCKS5
 
 ```txt
-185.193.31.87:80
-104.239.78.105:6050
-141.101.115.174:80
-58.186.162.58:16000
-8.42.71.225:39593
-56.125.190.247:1311
-45.131.6.32:80
-190.2.143.237:14009
-103.36.11.119:8181
-192.3.48.67:6060
+18.188.141.177:57521
+185.132.176.20:15608
+168.93.3.98:10462
+172.67.53.233:80
+104.25.0.209:80
+185.176.26.72:80
+193.142.38.247:8085
+202.136.88.68:1080
+45.145.131.145:8085
+45.43.81.176:5823
 
 ```
 
